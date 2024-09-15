@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VentanaInicioController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: fff; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="304.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../resource/image/presentacion.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="306.0" layoutY="1.0" prefHeight="400.0" prefWidth="295.0" style="-fx-background-color: fff; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="51.0" layoutY="173.0" prefHeight="50.0" prefWidth="195.0" text="SobAlim">
+                     <font>
+                        <Font name="Tw Cen MT Bold Italic" size="34.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="54.0" layoutY="267.0">
+                     <children>
+                        <ProgressBar fx:id="barraProgreso" focusTraversable="false" prefWidth="200.0" progress="0.0">
+                           <cursor>
+                              <Cursor fx:constant="WAIT" />
+                           </cursor>
+                        </ProgressBar>
+                        <Label prefHeight="29.0" prefWidth="125.0" text="Loading..." />
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="133.0" fitWidth="125.0" layoutX="88.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resource/image/icon.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

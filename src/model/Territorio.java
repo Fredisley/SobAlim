@@ -1,19 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
-/**
- *
- * @author Fredy
- */
-public class Territirio {
+
+public class Territorio {
     private String nombre;
     private int poblacion;
     private float extencionGeografica;
     private float tierrasProductivas;
     private String fecha;
+
+    public Territorio(String nombre, int poblacion, float extencionGeografica, float tierrasProductivas, String fecha) {
+        this.nombre = nombre;
+        this.poblacion = poblacion;
+        this.extencionGeografica = extencionGeografica;
+        this.tierrasProductivas = tierrasProductivas;
+        this.fecha = fecha;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;
@@ -69,6 +73,5 @@ public class Territirio {
     public String toString() {
         return this.getNombre(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+   
 }

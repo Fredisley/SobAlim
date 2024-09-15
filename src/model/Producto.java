@@ -1,18 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
-/**
- *
- * @author Fredy
- */
+
 public class Producto {
     
     private String nombre;
     private String tipo;
-    private String tierrasProductivas;
+    private float tierrasProductivas;
+
+    public Producto(String nombre, String tipo, float tierrasProductivas) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.tierrasProductivas = tierrasProductivas;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;
@@ -30,11 +32,11 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public String getTierrasProductivas() {
+    public float getTierrasProductivas() {
         return tierrasProductivas;
     }
 
-    public void setTierrasProductivas(String tierrasProductivas) {
+    public void setTierrasProductivas(float tierrasProductivas) {
         this.tierrasProductivas = tierrasProductivas;
     }
 
