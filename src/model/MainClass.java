@@ -1,18 +1,18 @@
+
 package model;
 
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 public class MainClass extends Application {
-    
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/VentanaInicio.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -23,4 +23,6 @@ public class MainClass extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
 }
+
