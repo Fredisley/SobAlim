@@ -406,9 +406,41 @@ public class MainWindowController {
     void modificarPercapita(ActionEvent event) {
 
     }
+    
+    @FXML
+    private void abrirDashboar(ActionEvent event){
+        this.ventanaDashboard.setVisible(true);
+        this.ventanaTerritorios.setVisible(false);
+        this.ventanaPlanes.setVisible(false);
+        this.ventanaProduccion.setVisible(false);
+    }
+    
+    @FXML
+    private void abrirTerritorios(ActionEvent event){
+         this.ventanaDashboard.setVisible(false);
+        this.ventanaTerritorios.setVisible(true);
+        this.ventanaPlanes.setVisible(false);
+        this.ventanaProduccion.setVisible(false);
+    }
+    
+    @FXML
+    private void abrirPlanes(ActionEvent event){
+         this.ventanaDashboard.setVisible(false);
+        this.ventanaTerritorios.setVisible(false);
+        this.ventanaPlanes.setVisible(true);
+        this.ventanaProduccion.setVisible(false);
+    }
+    
+    @FXML
+    private void abrirProduccion(ActionEvent event){
+         this.ventanaDashboard.setVisible(false);
+        this.ventanaTerritorios.setVisible(false);
+        this.ventanaPlanes.setVisible(false);
+        this.ventanaProduccion.setVisible(true);
+    }
 
     @FXML
-    void initialize() {
+    public void initialize() {
        
 
     }

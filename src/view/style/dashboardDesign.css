@@ -7,3 +7,48 @@
 .nav-form {
     -fx-background-color: linear-gradient(to bottom right, #272b3f, #256b51);
 }
+
+.buton_menu {
+    -fx-font-family: Monospaced;
+    -fx-font-size: 15;
+    -fx-text-fill: honeydew;
+    -fx-background-color: #256b51;
+   -fx-border-color: beige;
+   -fx-background-radius: 0;
+   -fx-border-radius: 0;
+   -fx-padding: 7.25px;
+   -fx-alignment: center;
+}
+
+.buton_menu:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+    -fx-cursor: closed_hand;
+}
+
+.buton_form {
+      -fx-font-family: SansSerif;
+    -fx-font-size: 15;
+    -fx-text-fill: honeydew;
+    -fx-background-color: #3333ff;
+   -fx-background-radius: 10;
+   -fx-border-radius: 10;
+   -fx-border-width: 0;
+   -fx-padding: 7.25px;
+   -fx--alignment: center;
+   -fx-content-display: left;
+   -fx-font-weight: bold;
+}
+
+.buton_form:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+    -fx-cursor: closed_hand;
+   
+}
+
+.tabla {
+    
+}
+
+.comboBox {
+    
+}

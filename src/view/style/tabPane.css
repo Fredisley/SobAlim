@@ -1,0 +1,35 @@
+.tab-pane {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 0;
+    -fx-background-radius: 5;
+    -fx-border-width: 0 0 1 0;
+    
+}
+
+.tab-header-area {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab {
+    -fx-border-width: 0 0 1 0;
+   -fx-background-color:  #f0f0f0;
+    -fx-border-color: #cccccc;
+    -fx-background-radius: 5 5 0 0;
+    -fx-border-radius: 0 0 0 0;
+}
+
+.tab:selected {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: aqua;
+    -fx-background-color: #ffffff;
+}
+
+.tab-label {
+    -fx-font-family: Serif;
+    -fx-text-fill: #272b3f;
+    -fx-padding: 5;
+   
+}
