@@ -1,10 +1,16 @@
 package controller;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -17,9 +23,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import model.ListClass;
+import model.Message;
+import model.Territorio;
 
 public class MainWindowController {
-
+    
+    private ListClass repositorio;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -72,22 +87,24 @@ public class MainWindowController {
     private AnchorPane ventanaTerritorios;
 
     @FXML
-    private TableView<?> tablaTerritorios;
+    private TableView<Territorio> tablaTerritorios;
 
     @FXML
-    private TableColumn<?, ?> columNombreTerritorio;
+    private TableColumn<Territorio, String> columNombreTerritorio;
 
     @FXML
-    private TableColumn<?, ?> columPoblacionTerritorio;
+    private TableColumn<Territorio, Integer> columPoblacionTerritorio;
 
     @FXML
-    private TableColumn<?, ?> columExtencionTerritorio;
+    private TableColumn<Territorio, Double> columExtencionTerritorio;
 
     @FXML
-    private TableColumn<?, ?> columTierraTerritorio;
+    private TableColumn<Territorio, Double> columTierraTerritorio;
 
     @FXML
-    private TableColumn<?, ?> columFechaTerritorio;
+    private TableColumn<Territorio,  String> columFechaTerritorio;
+    
+    private ObservableList<Territorio> territorios;
 
     @FXML
     private Button btnNuevoTerritorio;
@@ -309,7 +326,17 @@ public class MainWindowController {
 
     @FXML
     void agragarTerritorio(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TerritorioForm.fxml"));
+            Parent root = loader.load();
+            TerritorioFormController controller = loader.getController();
+            controller.initAttributes(this.repositorio);
+            scene(root, "/resource/image/icon.jpg", "Territorio Form");
+            setDataTablaTerritorio();
+        } catch(IOException e){
+            Message.error("Error", "No se pudo cargar la ventana" + e.getMessage());
+        }
+            
     }
 
     @FXML
@@ -421,6 +448,7 @@ public class MainWindowController {
         this.ventanaTerritorios.setVisible(true);
         this.ventanaPlanes.setVisible(false);
         this.ventanaProduccion.setVisible(false);
+        setDataTablaTerritorio();
     }
     
     @FXML
@@ -439,8 +467,51 @@ public class MainWindowController {
         this.ventanaProduccion.setVisible(true);
     }
 
+    private void scene(Parent parent, String url, String title) throws IOException {
+        try {
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image(url));
+            stage.setResizable(false);
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (Exception e) {
+            Message.error("Error", "Unknown Error: " + e.getMessage());
+        }
+    }
+    
+    public void initAttributtes(ListClass repositorio){
+         this.repositorio =  repositorio;
+    }
+    
+    private void resetTable(TableView table) {
+         table.getItems().clear(); // Vaciar el TableView
+    }
+    
+    private void setDataTablaTerritorio( ) {
+       try {
+       resetTable(tablaTerritorios);
+       this.repositorio.cargarTerritorio();
+       this.tablaTerritorios.setItems(this.repositorio.getTerritorios());
+       this.columNombreTerritorio.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+       this.columPoblacionTerritorio.setCellValueFactory(new PropertyValueFactory<>("poblacion"));
+       this.columExtencionTerritorio.setCellValueFactory(new PropertyValueFactory<Territorio, Double>("extencionGeografica"));
+       this.columTierraTerritorio.setCellValueFactory(new PropertyValueFactory<Territorio, Double>("tierrasProductivas"));
+       this.columFechaTerritorio.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+       } catch (Exception e){
+           Message.error("ERROR", "Error al cargar tabla");
+       }
+    }
+    
     @FXML
     public void initialize() {
+        tablaTerritorios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+           // Habilitar el botón si hay una fila seleccionada, y deshabilitar si no
+           btnEditarTerritorio.setDisable(newSelection == null);
+          btnEliminarTerritorio.setDisable(newSelection == null);
+       });
        
 
     }

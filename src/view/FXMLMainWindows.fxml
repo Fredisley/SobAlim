@@ -86,7 +86,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="ventanaDashboard" prefHeight="574.0" prefWidth="856.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="ventanaDashboard" prefHeight="574.0" prefWidth="856.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <VBox layoutX="50.0" layoutY="65.0">
                                  <children>
@@ -137,7 +137,7 @@
                               </VBox>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="ventanaTerritorios" layoutY="-14.0" prefHeight="555.0" prefWidth="856.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
+                        <AnchorPane fx:id="ventanaTerritorios" layoutY="-14.0" prefHeight="555.0" prefWidth="856.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
                            <children>
                               <TabPane layoutX="41.900001525878906" layoutY="24.0" prefHeight="582.0" prefWidth="856.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <tabs>

@@ -4,21 +4,88 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javafx.scene.image.Image;
 
 public class DatabaseConecction {
+    private final String URL= "jdbc:sqlite:src/data/datos.db";
+    private Connection connection;
     
-    // URL para la base de datos SQLite
-    private static final String URL = "jdbc:sqlite:datos.db";
-
-    public static void connect() {
+    //metodo para conectar a la base de datos
+    public void connect()  {
         try {
             Class.forName("org.sqlite.JDBC");
-              Connection conn = DriverManager.getConnection(URL);
-               System.out.println("Conexión a la base de datos establecida.");
-           } catch (ClassNotFoundException | SQLException e) {
-               System.out.println("Error en la conexión: " + e.getMessage());
+            this.connection = DriverManager.getConnection(URL);
+        } catch(ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+          
            }
-       }
     }
+    
+    //metodo para crear tablas
+    public void createTable(String sql) {
+        try (Statement stmt = connection.createStatement() ){
+            stmt.execute(sql);
+        } catch(SQLException e){
+            e.printStackTrace();
+             //Message.error("ERROR", "Error al crear tabla: " + e.getMessage(), new Image("image/icon/error.png"));
+        } finally {
+            close();
+        }
+    }
+    
+    //metodo para actualizar informacion
+    public void executeUpdate(String sql){
+           try(PreparedStatement pstmt = connection.prepareStatement(sql)){
+               pstmt.executeUpdate();
+           }catch (SQLException e) {
+            Message.error("ERROR", "Error en la operación: " + e.getMessage());
+         } finally {
+               close();
+           }
+           
+       }
+    
+    /*public void insertTerritorio(String sql, String nombre, int poblacion, double extencion, double tierras, String fecha) {
+    try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        pstmt.setString(1, nombre);
+        pstmt.setInt(2, poblacion);
+        pstmt.setDouble(3, extencion);
+        pstmt.setDouble(4, tierras);
+        pstmt.setString(1, fecha);
+        pstmt.executeUpdate();
+    } catch (SQLException e) {
+        Message.error("ERROR", "Error en la operación: " + e.getMessage());
+    }
+}*/
+
+    
+    //metodo para obtener información
+    public ResultSet executeQuery(String sql){
+        ResultSet resultSet = null;
+        PreparedStatement pstmt = null;
+        try{
+            pstmt = connection.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
+            return resultSet;
+        }catch(SQLException e){
+            Message.error("ERROR", "Error en la operación: " + e.getMessage());
+            return null;
+        } 
+    }
+    
+    //metodo para cerrar la conexion
+    public void close(){
+        try {
+            if(connection != null && !connection.isClosed()){
+                connection.close();
+            }
+        } catch (SQLException e){
+            Message.error("ERROR", "Error en la operación: " + e.getMessage());
+        }
+    }
+    }
+  
 
 

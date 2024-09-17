@@ -1,6 +1,7 @@
 
 package model;
 
+import controller.VentanaInicioController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +14,15 @@ public class MainClass extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/VentanaInicio.fxml"));
+        ListClass repositorio = new ListClass();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VentanaInicio.fxml"));
+        Parent root = loader.load();
+        VentanaInicioController controller = loader.getController();
+        controller.initAttributtes(repositorio);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("SobAlim");
-        stage.getIcons().add(new Image("/resource/image/icon.jpg") {});
+        stage.getIcons().add(new Image("/resource/image/icon.jpg"));
         stage.setResizable(false);
         stage.show();
     }

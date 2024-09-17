@@ -1,0 +1,29 @@
+.text-field {
+  -fx-font-family: Serif;
+  -fx-background-color: transparent;
+  -fx-border-color: rgba(0,0,0,0.3);
+  -fx-border-width: 0 0 1 0;
+  -fx-alignment: BOTTOM_CENTER;
+  -fx-font-size: 1.2em;
+  -fx-text-fill: #272b3f;
+  -fx-effect: null;
+  -fx-border-radius: 0;
+}
+
+.text-field:hover {
+    -fx-border-color: #3333ff;
+    
+}
+
+.text-field:focused, .text-field:selected {
+  -fx-font-family: Serif;
+  -fx-background-color: transparent;
+  -fx-border-color: aqua;
+  -fx-border-width: 0 0 1 0;
+  -fx-alignment: BOTTOM_CENTER;
+  -fx-font-size: 1.2em;
+  -fx-text-fill: #272b3f;
+  -fx-effect: null;
+  -fx-border-radius: 0;
+    
+}

@@ -3,19 +3,27 @@ package model;
 
 
 public class Producto {
-    
+    private Integer id;
+    private Territorio territorio;
     private String nombre;
     private String tipo;
     private float tierrasProductivas;
 
-    public Producto(String nombre, String tipo, float tierrasProductivas) {
+    public Producto(Territorio territorio, String nombre, String tipo, float tierrasProductivas) {
+        this.territorio = territorio;
         this.nombre = nombre;
         this.tipo = tipo;
         this.tierrasProductivas = tierrasProductivas;
     }
-    
-    
 
+    public Territorio getTerritorio() {
+        return territorio;
+    }
+
+    public void setTerritorio(Territorio territorio) {
+        this.territorio = territorio;
+    }
+    
     public String getNombre() {
         return nombre;
     }

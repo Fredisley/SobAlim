@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.deploy.util.FXLoader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import model.CreateDatabase;
+import model.ListClass;
 
 public class VentanaInicioController {
 
@@ -24,10 +27,19 @@ public class VentanaInicioController {
     @FXML
     private ProgressBar barraProgreso;
     
+    private CreateDatabase database;
+    private ListClass repositorio;
+
     
+      
+    public void initAttributtes(ListClass repositorio){
+        this.repositorio = repositorio;
+    }
 
     @FXML
     public void initialize() {
+       
+    
         barraProgreso.setProgress(0);
      // Usar un Task para actualizar la barra de progreso
         Task<Void> task = new Task<Void>() {
@@ -57,8 +69,11 @@ public class VentanaInicioController {
     private void openNextWindow() {
         try {
             // Carga la nueva ventana
-            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLMainWindows.fxml"));
-             Scene scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FXMLMainWindows.fxml"));
+            Parent root = loader.load();
+            MainWindowController controller = loader.getController();
+            controller.initAttributtes(this.repositorio);
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("SobAlim");
             stage.getIcons().add(new Image("/resource/image/icon.jpg"));
