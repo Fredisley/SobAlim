@@ -29,7 +29,7 @@ public class DatabaseConecction {
             stmt.execute(sql);
         } catch(SQLException e){
             e.printStackTrace();
-             //Message.error("ERROR", "Error al crear tabla: " + e.getMessage(), new Image("image/icon/error.png"));
+             Message.error("ERROR", "Error al crear tabla: ");
         } finally {
             close();
         }
@@ -40,11 +40,9 @@ public class DatabaseConecction {
            try(PreparedStatement pstmt = connection.prepareStatement(sql)){
                pstmt.executeUpdate();
            }catch (SQLException e) {
+               e.printStackTrace();
             Message.error("ERROR", "Error en la operación: " + e.getMessage());
-         } finally {
-               close();
-           }
-           
+         }
        }
     
     /*public void insertTerritorio(String sql, String nombre, int poblacion, double extencion, double tierras, String fecha) {

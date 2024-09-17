@@ -57,6 +57,7 @@ public final class ListClass {
     
        public void eliminarTerritorio(int id) throws Exception{
            String sql = String.format("DELETE FROM territorios WHERE territorios.id=%d", id);
+           System.out.println(sql);
            connection.connect();
            connection.executeUpdate(sql);
        }

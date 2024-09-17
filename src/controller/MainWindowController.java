@@ -381,7 +381,17 @@ public class MainWindowController {
 
     @FXML
     void editarTerritorio(ActionEvent event) {
-
+            Territorio territorio = this.tablaTerritorios.getSelectionModel().getSelectedItem();
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TerritorioFormEdit.fxml"));
+            Parent root = loader.load();
+            TerritorioFormEditController controller = loader.getController();
+            controller.initAttributes(this.repositorio, territorio);
+            scene(root, "/resource/image/icon.jpg", "Territorio Form");
+            setDataTablaTerritorio();
+        } catch(IOException e){
+            Message.error("Error", "No se pudo cargar la ventana" + e.getMessage());
+        }
     }
 
     @FXML
@@ -415,8 +425,17 @@ public class MainWindowController {
     }
 
     @FXML
-    void eliminarTerritorio(ActionEvent event) {
-
+     void eliminarTerritorio(ActionEvent event) {
+            Territorio territorio = this.tablaTerritorios.getSelectionModel().getSelectedItem();
+            try{ 
+                System.out.println(territorio.getId());
+                this.repositorio.eliminarTerritorio(territorio.getId());
+                setDataTablaTerritorio();
+                Message.information("INFORMACION", "Operacion exitosa");
+            } catch(Exception e) {
+                e.printStackTrace();
+                Message.error("ERROR", "Ocurrio un error tratando de eliminar el Territorio");
+            } 
     }
 
     @FXML
