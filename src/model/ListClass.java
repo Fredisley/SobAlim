@@ -11,17 +11,33 @@ public final class ListClass {
        private CreateDatabase db; 
        private DatabaseConecction connection = new DatabaseConecction();
        private ObservableList<Territorio> territorios = FXCollections.observableArrayList();
+       private ObservableList<Producto> productos = FXCollections.observableArrayList();
+       private ObservableList<RecursosAgronomos> recursosAgronomos = FXCollections.observableArrayList();
+       private ObservableList<RecursosPecuarios> recursosPecuarios = FXCollections.observableArrayList();
        
 
     public ListClass() throws Exception {
                 this.db = new CreateDatabase();
                 db.crearTabla();
-                fetchTerritotios();
     }
 
     public ObservableList<Territorio> getTerritorios() throws Exception{
         return territorios;
     }
+
+    public ObservableList<Producto> getProductos()  throws Exception{
+        return productos;
+    }
+
+    public ObservableList<RecursosAgronomos> getRecursosAgronomos()  throws Exception{
+        return recursosAgronomos;
+    }
+
+    public ObservableList<RecursosPecuarios> getRecursosPecuarios()  throws Exception{
+        return recursosPecuarios;
+    }
+    
+    
        
        public void crearTerritorio(String nombre, int poblacion, double extencion, double tierras ) throws Exception{
            String fecha = LocalDate.now().toString();
@@ -57,10 +73,20 @@ public final class ListClass {
     
        public void eliminarTerritorio(int id) throws Exception{
            String sql = String.format("DELETE FROM territorios WHERE territorios.id=%d", id);
-           System.out.println(sql);
            connection.connect();
            connection.executeUpdate(sql);
        }
+       
+       public void updateTerritorio(int id, String nombre, int poblacion, double extencion, double tierras ) throws Exception{
+           String fecha = LocalDate.now().toString();
+           Territorio territorio = new Territorio(id,  nombre, poblacion, extencion, tierras, fecha);
+           String sql = String.format("UPDATE territorios SET nombre='%s', poblacion=%d, extencion=%.2f, tierras=%.2f, fecha='%s' WHERE id=%d", 
+           territorio.getNombre(), territorio.getPoblacion(), territorio.getExtencionGeografica(), territorio.getTierrasProductivas(), territorio.getFecha(), territorio.getId());
+            connection.connect();
+            connection.executeUpdate(sql);
+       }
+       
+       
 }
         
     

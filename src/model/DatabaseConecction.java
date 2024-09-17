@@ -42,7 +42,9 @@ public class DatabaseConecction {
            }catch (SQLException e) {
                e.printStackTrace();
             Message.error("ERROR", "Error en la operación: " + e.getMessage());
-         }
+         } finally {
+               close();
+           }
        }
     
     /*public void insertTerritorio(String sql, String nombre, int poblacion, double extencion, double tierras, String fecha) {

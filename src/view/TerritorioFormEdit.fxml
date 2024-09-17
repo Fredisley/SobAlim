@@ -39,7 +39,7 @@
                         <Font name="Serif Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textPoblación" focusTraversable="false" prefHeight="31.0" prefWidth="117.0" />
+                  <TextField fx:id="textPoblacion" focusTraversable="false" prefHeight="31.0" prefWidth="117.0" />
                </children>
             </HBox>
             <VBox layoutX="44.0" layoutY="154.0">

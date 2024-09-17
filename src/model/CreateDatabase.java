@@ -25,36 +25,44 @@ public class CreateDatabase {
                 + ");";
     
        private String tablaProducto = "CREATE TABLE IF NOT EXISTS tabla_producto("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "territorio_id INTEGER NOT NULL,"
-                + "nombre TEXT NOT NULL,"
-                + "tipo TEXT NOT NULL,"
-                + "tierras REAL NOT NULL"
-                + ");";
+               + "id INTEGER,"
+               + "territorio_id INTEGER NOT NULL,"
+               + "nombre	TEXT NOT NULL,"
+               + "tipo TEXT NOT NULL,"
+               + "tierras REAL NOT NULL,"
+	      + "PRIMARY KEY(id AUTOINCREMENT),"
+  	      + "FOREIGN KEY(territorio_id) REFERENCES territorios(id)"
+               + ");";
     
        private String tablaRecursos = "CREATE TABLE IF NOT EXISTS tabla_recursos("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "territorio_id INTEGER NOT NULL,"
-                + "trabajadores INTEGER NOT NULL"
-                + ");";
+               +  "id INTEGER,"
+               + "territorio_id INTEGER NOT NULL,"
+               + "trabajadores INTEGER NOT NULL,"
+               + "PRIMARY KEY(id AUTOINCREMENT),"
+               + "FOREIGN KEY(territorio_id) REFERENCES territorios(id)"
+               + ");";
         
        private String tablaRecursosA = "CREATE TABLE IF NOT EXISTS tabla_recursos_a("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "territorio_id INTEGER NOT NULL,"
-                + "tierras_vianda REAL NOT NULL,"
-                + "tierras_hortaliza REAL NOT NULL,"
-                + "tierras_frutales REAL NOT NULL,"
-                + "tierras_grano REAL NOT NULL"
+               + "id INTEGER,"
+               + "recursos_id INTEGER NOT NULL,"
+               +  "tierras_vianda	REAL NOT NULL,"
+               + "tierras_hortaliza REAL NOT NULL,"
+               + "tierras_frutales	REAL NOT NULL,"
+               + "tierras_grano REAL NOT NULL,"
+               + "PRIMARY KEY(id AUTOINCREMENT),"
+                + "FOREIGN KEY(recursos_id) REFERENCES tabla_recursos(id)"
                 + ");";
         
        private String tablaRecursosP = "CREATE TABLE IF NOT EXISTS tabla_recursos_p("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "territorio_id INTEGER NOT NULL,"
-                + "espejo_agua REAL NOT NULL,"
-                + "granja_vacuno INTEGER NOT NULL,"
-                + "granja_avicola INTEGER NOT NULL,"
-                + "granja_ovino INTEGER NOT NULL,"
-                + "granja_porcino INTEGER NOT NULL"
+               +  "id INTEGER,"
+               + "recursos_id INTEGER NOT NULL,"
+               + "espejo_agua REAL NOT NULL,"
+               + "granja_vacuno	INTEGER NOT NULL,"
+               + "granja_avicola	INTEGER NOT NULL,"
+               + "granja_ovino INTEGER NOT NULL,"
+               + "granja_porcino	INTEGER NOT NULL,"
+               + "PRIMARY KEY(id AUTOINCREMENT),"
+               + "FOREIGN KEY(recursos_id) REFERENCES tabla_recursos(id)"
                 + ");";
         
     public void crearTabla() {
