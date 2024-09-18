@@ -1,9 +1,9 @@
 package controller;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,12 +29,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ListClass;
 import model.Message;
+import model.RecursosAgronomos;
 import model.Territorio;
 
 public class MainWindowController {
-    
+
     private ListClass repositorio;
-    
+
     @FXML
     private ResourceBundle resources;
 
@@ -102,8 +103,8 @@ public class MainWindowController {
     private TableColumn<Territorio, Double> columTierraTerritorio;
 
     @FXML
-    private TableColumn<Territorio,  String> columFechaTerritorio;
-    
+    private TableColumn<Territorio, String> columFechaTerritorio;
+
     private ObservableList<Territorio> territorios;
 
     @FXML
@@ -116,25 +117,25 @@ public class MainWindowController {
     private Button btnEliminarTerritorio;
 
     @FXML
-    private TableView<?> tablaAgricola;
+    private TableView<RecursosAgronomos> tablaAgricola;
 
     @FXML
-    private TableColumn<?, ?> columTerritorioAgricola;
+    private TableColumn<RecursosAgronomos, String> columTerritorioAgricola;
 
     @FXML
-    private TableColumn<?, ?> columTrabajadores;
+    private TableColumn<RecursosAgronomos, Integer> columTrabajadores;
 
     @FXML
-    private TableColumn<?, ?> columViandas;
+    private TableColumn<RecursosAgronomos, Double> columViandas;
 
     @FXML
-    private TableColumn<?, ?> columHortalizas;
+    private TableColumn<RecursosAgronomos, Double> columHortalizas;
 
     @FXML
-    private TableColumn<?, ?> columFrutales;
+    private TableColumn<RecursosAgronomos, Double> columFrutales;
 
     @FXML
-    private TableColumn<?, ?> columGranos;
+    private TableColumn<RecursosAgronomos, Double> columGranos;
 
     @FXML
     private Button btnNuevoRegistroAgricola;
@@ -333,10 +334,10 @@ public class MainWindowController {
             controller.initAttributes(this.repositorio);
             scene(root, "/resource/image/icon.jpg", "Territorio Form");
             setDataTablaTerritorio();
-        } catch(IOException e){
+        } catch (IOException e) {
             Message.error("Error", "No se pudo cargar la ventana" + e.getMessage());
         }
-            
+
     }
 
     @FXML
@@ -351,7 +352,16 @@ public class MainWindowController {
 
     @FXML
     void agregarRegistroAgricola(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RecursosForm.fxml"));
+            Parent root = loader.load();
+            RecursosFormController controller = loader.getController();
+            controller.initAttributes(this.repositorio);
+            scene(root, "/resource/image/icon.jpg", "Recursos Form");
+            setDataTablaRecursos();
+        } catch (Exception e) {
+            Message.error("Error", "No se pudo cargar la ventana" + e.getMessage());
+        }
     }
 
     @FXML
@@ -371,7 +381,17 @@ public class MainWindowController {
 
     @FXML
     void editarRegistroAgricola(ActionEvent event) {
-
+            RecursosAgronomos recurso = this.tablaAgricola.getSelectionModel().getSelectedItem();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RecursosFormEdit.fxml"));
+            Parent root = loader.load();
+            RecursosFormEditController controller = loader.getController();
+            controller.initAttributes(this.repositorio, recurso);
+            scene(root, "/resource/image/icon.jpg", "Recursos Form");
+            setDataTablaRecursos();
+        } catch (Exception e) {
+            Message.error("Error", "No se pudo cargar la ventana" + e.getMessage());
+        }
     }
 
     @FXML
@@ -381,22 +401,22 @@ public class MainWindowController {
 
     @FXML
     void editarTerritorio(ActionEvent event) {
-            Territorio territorio = this.tablaTerritorios.getSelectionModel().getSelectedItem();
-             try {
+        Territorio territorio = this.tablaTerritorios.getSelectionModel().getSelectedItem();
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TerritorioFormEdit.fxml"));
             Parent root = loader.load();
             TerritorioFormEditController controller = loader.getController();
             controller.initAttributes(this.repositorio, territorio);
             scene(root, "/resource/image/icon.jpg", "Territorio Form");
             setDataTablaTerritorio();
-        } catch(IOException e){
+        } catch (IOException e) {
             Message.error("Error", "No se pudo cargar la ventana" + e.getMessage());
         }
     }
 
     @FXML
     void edtarProduccionAgricola(ActionEvent event) {
-
+            
     }
 
     @FXML
@@ -416,7 +436,14 @@ public class MainWindowController {
 
     @FXML
     void eliminarRegistroAgricola(ActionEvent event) {
-
+            RecursosAgronomos recurso = this.tablaAgricola.getSelectionModel().getSelectedItem();
+        try {
+            this.repositorio.eliminarRecursoAgronomo(recurso.getId());
+            setDataTablaTerritorio();
+            Message.information("INFORMACION", "Operacion exitosa");
+        } catch (Exception e) {
+            Message.error("ERROR", "Ocurrio un error tratando de eliminar el Territorio");
+        }
     }
 
     @FXML
@@ -425,17 +452,15 @@ public class MainWindowController {
     }
 
     @FXML
-     void eliminarTerritorio(ActionEvent event) {
-            Territorio territorio = this.tablaTerritorios.getSelectionModel().getSelectedItem();
-            try{ 
-                System.out.println(territorio.getId());
-                this.repositorio.eliminarTerritorio(territorio.getId());
-                setDataTablaTerritorio();
-                Message.information("INFORMACION", "Operacion exitosa");
-            } catch(Exception e) {
-                e.printStackTrace();
-                Message.error("ERROR", "Ocurrio un error tratando de eliminar el Territorio");
-            } 
+    void eliminarTerritorio(ActionEvent event) {
+        Territorio territorio = this.tablaTerritorios.getSelectionModel().getSelectedItem();
+        try {
+            this.repositorio.eliminarTerritorio(territorio.getId());
+            setDataTablaTerritorio();
+            Message.information("INFORMACION", "Operacion exitosa");
+        } catch (Exception e) {
+            Message.error("ERROR", "Ocurrio un error tratando de eliminar el Territorio");
+        }
     }
 
     @FXML
@@ -452,35 +477,36 @@ public class MainWindowController {
     void modificarPercapita(ActionEvent event) {
 
     }
-    
+
     @FXML
-    private void abrirDashboar(ActionEvent event){
+    private void abrirDashboar(ActionEvent event) {
         this.ventanaDashboard.setVisible(true);
         this.ventanaTerritorios.setVisible(false);
         this.ventanaPlanes.setVisible(false);
         this.ventanaProduccion.setVisible(false);
     }
-    
+
     @FXML
-    private void abrirTerritorios(ActionEvent event){
-         this.ventanaDashboard.setVisible(false);
+    private void abrirTerritorios(ActionEvent event) {
+        this.ventanaDashboard.setVisible(false);
         this.ventanaTerritorios.setVisible(true);
         this.ventanaPlanes.setVisible(false);
         this.ventanaProduccion.setVisible(false);
         setDataTablaTerritorio();
+        setDataTablaRecursos();
     }
-    
+
     @FXML
-    private void abrirPlanes(ActionEvent event){
-         this.ventanaDashboard.setVisible(false);
+    private void abrirPlanes(ActionEvent event) {
+        this.ventanaDashboard.setVisible(false);
         this.ventanaTerritorios.setVisible(false);
         this.ventanaPlanes.setVisible(true);
         this.ventanaProduccion.setVisible(false);
     }
-    
+
     @FXML
-    private void abrirProduccion(ActionEvent event){
-         this.ventanaDashboard.setVisible(false);
+    private void abrirProduccion(ActionEvent event) {
+        this.ventanaDashboard.setVisible(false);
         this.ventanaTerritorios.setVisible(false);
         this.ventanaPlanes.setVisible(false);
         this.ventanaProduccion.setVisible(true);
@@ -500,38 +526,69 @@ public class MainWindowController {
             Message.error("Error", "Unknown Error: " + e.getMessage());
         }
     }
-    
-    public void initAttributtes(ListClass repositorio){
-         this.repositorio =  repositorio;
+
+    public void initAttributtes(ListClass repositorio) {
+        this.repositorio = repositorio;
     }
-    
+
     private void resetTable(TableView table) {
-         table.getItems().clear(); // Vaciar el TableView
+        table.getItems().clear(); // Vaciar el TableView
     }
-    
-    private void setDataTablaTerritorio( ) {
-       try {
-       resetTable(tablaTerritorios);
-       this.repositorio.cargarTerritorio();
-       this.tablaTerritorios.setItems(this.repositorio.getTerritorios());
-       this.columNombreTerritorio.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-       this.columPoblacionTerritorio.setCellValueFactory(new PropertyValueFactory<>("poblacion"));
-       this.columExtencionTerritorio.setCellValueFactory(new PropertyValueFactory<Territorio, Double>("extencionGeografica"));
-       this.columTierraTerritorio.setCellValueFactory(new PropertyValueFactory<Territorio, Double>("tierrasProductivas"));
-       this.columFechaTerritorio.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-       } catch (Exception e){
-           Message.error("ERROR", "Error al cargar tabla");
-       }
+
+    private void setDataTablaTerritorio() {
+        try {
+            resetTable(tablaTerritorios);
+            this.repositorio.cargarTerritorio();
+            this.tablaTerritorios.setItems(this.repositorio.getTerritorios());
+            this.columNombreTerritorio.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            this.columPoblacionTerritorio.setCellValueFactory(new PropertyValueFactory<>("poblacion"));
+            this.columExtencionTerritorio.setCellValueFactory(new PropertyValueFactory<>("extencionGeografica"));
+            this.columTierraTerritorio.setCellValueFactory(new PropertyValueFactory<>("tierrasProductivas"));
+            this.columFechaTerritorio.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        } catch (Exception e) {
+            Message.error("ERROR", "Error al cargar tabla");
+        }
     }
-    
+
+    private void setDataTablaRecursos() {
+        try {
+            resetTable(tablaAgricola);
+            this.repositorio.cargarRecursoAgronomo();
+            this.tablaAgricola.setItems(this.repositorio.getRecursosAgronomos());
+            this.columTerritorioAgricola.setCellValueFactory(cellData -> {
+                try {
+                    RecursosAgronomos recurso = cellData.getValue();
+                    //obtener el nombre del territorio usando el id
+                    Territorio territorio = this.repositorio.obtenerTerritorioPorId(recurso.getTerritorioId());
+                    return new SimpleStringProperty(territorio.getNombre());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return new SimpleStringProperty("");
+            });
+
+            this.columTrabajadores.setCellValueFactory(new PropertyValueFactory<>("trabajadores"));
+            this.columViandas.setCellValueFactory(new PropertyValueFactory<>("tierrasVianda"));
+            this.columHortalizas.setCellValueFactory(new PropertyValueFactory<>("tierrasHortalizas"));
+            this.columFrutales.setCellValueFactory(new PropertyValueFactory<>("tierrasFrutales"));
+            this.columGranos.setCellValueFactory(new PropertyValueFactory<>("tierrasGrano"));
+        } catch (Exception e) {
+            Message.error("ERROR", "Error al cargar tabla");
+        }
+    }
+
     @FXML
     public void initialize() {
         tablaTerritorios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-           // Habilitar el botón si hay una fila seleccionada, y deshabilitar si no
-           btnEditarTerritorio.setDisable(newSelection == null);
-          btnEliminarTerritorio.setDisable(newSelection == null);
-       });
-       
+            // Habilitar el botón si hay una fila seleccionada, y deshabilitar si no
+            btnEditarTerritorio.setDisable(newSelection == null);
+            btnEliminarTerritorio.setDisable(newSelection == null);
+        });
+        
+        tablaAgricola.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            btnEditarRegistroAgricola.setDisable(newSelection == null);
+            btnEliminarRegistroAgricola.setDisable(newSelection == null);
+        });
 
     }
 }

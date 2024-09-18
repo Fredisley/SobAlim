@@ -1,27 +1,43 @@
-
+ 
 package model;
 
 
 public class Producto {
-    private Integer id;
-    private Territorio territorio;
+    private int id;
+    private int territorio_id;
     private String nombre;
     private String tipo;
-    private float tierrasProductivas;
+    private double tierrasProductivas;
 
-    public Producto(Territorio territorio, String nombre, String tipo, float tierrasProductivas) {
-        this.territorio = territorio;
+    public Producto(int territorio_id, String nombre, String tipo, double tierrasProductivas) {
+        this.territorio_id = territorio_id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.tierrasProductivas = tierrasProductivas;
     }
 
-    public Territorio getTerritorio() {
-        return territorio;
+    public Producto(int id, int territorio_id, String nombre, String tipo, double tierrasProductivas) {
+        this.id = id;
+        this.territorio_id = territorio_id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.tierrasProductivas = tierrasProductivas;
     }
 
-    public void setTerritorio(Territorio territorio) {
-        this.territorio = territorio;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTerritorio_id() {
+        return territorio_id;
+    }
+
+    public void setTerritorio_id(int territorio_id) {
+        this.territorio_id = territorio_id;
     }
     
     public String getNombre() {
@@ -40,11 +56,11 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public float getTierrasProductivas() {
+    public double getTierrasProductivas() {
         return tierrasProductivas;
     }
 
-    public void setTierrasProductivas(float tierrasProductivas) {
+    public void setTierrasProductivas(double tierrasProductivas) {
         this.tierrasProductivas = tierrasProductivas;
     }
 

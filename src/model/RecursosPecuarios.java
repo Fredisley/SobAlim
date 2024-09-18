@@ -10,8 +10,8 @@ public class RecursosPecuarios extends RecursosHumanos {
     private int granjaOvino;
     private int granjaPorcino;
 
-    public RecursosPecuarios(float espejoAgua, int granjaVacuno, int granjaAvicola, int granjaOvino, int granjaPorcino, int ID, Territorio territorio, int trabajadores) {
-        super(ID, territorio, trabajadores);
+    public RecursosPecuarios(float espejoAgua, int granjaVacuno, int granjaAvicola, int granjaOvino, int granjaPorcino, int id, int territorio_id, int trabajadores) {
+        super(id, territorio_id);
         this.espejoAgua = espejoAgua;
         this.granjaVacuno = granjaVacuno;
         this.granjaAvicola = granjaAvicola;

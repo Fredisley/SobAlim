@@ -3,48 +3,48 @@ package model;
 
 
 public class RecursosAgronomos extends RecursosHumanos{
-        private float tierrasVianda;
-        private float tierrasHortalizas;
-        private float tierrasFrutales;
-        private float tierrasGrano;
+        private double tierrasVianda;
+        private double tierrasHortalizas;
+        private double tierrasFrutales;
+        private double tierrasGrano;
 
-    public RecursosAgronomos(float tierrasVianda, float tierrasHortalizas, float tierrasFrutales, float tierrasGrano, int ID, Territorio territorio, int trabajadores) {
-        super(ID, territorio, trabajadores);
+    public RecursosAgronomos(double tierrasVianda, double tierrasHortalizas, double tierrasFrutales, double tierrasGrano, int id, int territorio_id, int trabajadores) {
+        super(id, territorio_id, trabajadores);
         this.tierrasVianda = tierrasVianda;
         this.tierrasHortalizas = tierrasHortalizas;
         this.tierrasFrutales = tierrasFrutales;
         this.tierrasGrano = tierrasGrano;
     }
-
-    public float getTierrasFrutales() {
+  
+    public double getTierrasFrutales() {
         return tierrasFrutales;
     }
 
-    public float getTierrasGrano() {
+    public double getTierrasGrano() {
         return tierrasGrano;
     }
 
-    public float getTierrasHortalizas() {
+    public double getTierrasHortalizas() {
         return tierrasHortalizas;
     }
 
-    public float getTierrasVianda() {
+    public double getTierrasVianda() {
         return tierrasVianda;
     }
 
-    public void setTierrasFrutales(float tierrasFrutales) {
+    public void setTierrasFrutales(double tierrasFrutales) {
         this.tierrasFrutales = tierrasFrutales;
     }
 
-    public void setTierrasGrano(float tierrasGrano) {
+    public void setTierrasGrano(double tierrasGrano) {
         this.tierrasGrano = tierrasGrano;
     }
 
-    public void setTierrasHortalizas(float tierrasHortalizas) {
+    public void setTierrasHortalizas(double tierrasHortalizas) {
         this.tierrasHortalizas = tierrasHortalizas;
     }
 
-    public void setTierrasVianda(float tierrasVianda) {
+    public void setTierrasVianda(double tierrasVianda) {
         this.tierrasVianda = tierrasVianda;
     }
         

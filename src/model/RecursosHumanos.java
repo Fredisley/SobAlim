@@ -1,34 +1,40 @@
 package model;
 
 public class RecursosHumanos {
-    private int ID;
-    private Territorio territorio; 
+    private int id;
+    private int territorioId; 
     private int trabajadores;
 
-    public RecursosHumanos(int ID, Territorio territorio, int trabajadores) {
-        this.ID = ID;
-        this.territorio = territorio;
+    public RecursosHumanos(int id, int territorioId, int trabajadores) {
+        this.id = id;
+        this.territorioId = territorioId;
         this.trabajadores = trabajadores;
     }
-
-    public int getID() {
-        return ID;
+    
+    public RecursosHumanos(int id, int territorioId){
+        this.id = id;
+        this.territorioId = territorioId;
     }
 
-    public Territorio getTerritorio() {
-        return territorio;
+    public int getTerritorioId() {
+        return territorioId;
+    }
+
+    public void setTerritorioId(int territorioId) {
+        this.territorioId = territorioId;
+    }
+    
+    
+    public int getId() {
+        return id;
     }
 
     public int getTrabajadores() {
         return trabajadores;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public void setTerritorio(Territorio territorio) {
-        this.territorio = territorio;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTrabajadores(int trabajadores) {

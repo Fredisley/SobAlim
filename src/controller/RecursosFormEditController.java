@@ -1,26 +1,83 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import model.Territorio;
+import model.ListClass;
+import model.Message;
+import model.RecursosAgronomos;
 
-/**
- * FXML Controller class
- *
- * @author Fredy
- */
-public class RecursosFormEditController implements Initializable {
+public class RecursosFormEditController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ComboBox<Territorio> cbTerritorios;
+
+    @FXML
+    private TextField textTrabajadores;
+
+    @FXML
+    private TextField textViandas;
+
+    @FXML
+    private TextField textHortalizas;
+
+    @FXML
+    private TextField textGranos;
+
+    @FXML
+    private TextField textFrutales;
+
+    private ListClass repositorio;
+    private RecursosAgronomos recurso;
+
+    @FXML
+    void aceptar(ActionEvent event) {
+        try {
+            int id = this.recurso.getId();
+            int territorioId = this.cbTerritorios.getValue().getId();
+            int trabajadores = Integer.parseInt(this.textTrabajadores.getText());
+            double viandas = Double.parseDouble(this.textViandas.getText());
+            double hortalizas = Double.parseDouble(this.textHortalizas.getText());
+            double frutas = Double.parseDouble(this.textFrutales.getText());
+            double granos = Double.parseDouble(this.textGranos.getText());
+            this.repositorio.updateRecursoAgronomo(id, viandas, hortalizas, frutas, granos, territorioId, trabajadores);
+            Stage stage = (Stage) textFrutales.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            Message.error("ERROR", "Introdusca valores validos");
+        }
+    }
+
+    @FXML
+    void cancelar(ActionEvent event) {
+        Stage stage = (Stage) textFrutales.getScene().getWindow();
+        stage.close();
+    }
+
+    public void initAttributes(ListClass repositorio, RecursosAgronomos recurso) throws Exception {
+        this.repositorio = repositorio;
+        this.recurso = recurso;
+        this.textTrabajadores.setText(Integer.toString(recurso.getTrabajadores()));
+        this.textFrutales.setText(Double.toString(recurso.getTierrasFrutales()));
+        this.textHortalizas.setText(Double.toString(recurso.getTierrasHortalizas()));
+        this.textViandas.setText(Double.toString(recurso.getTierrasVianda()));
+        this.textGranos.setText(Double.toString(recurso.getTierrasGrano()));
+        this.cbTerritorios.setValue(this.repositorio.obtenerTerritorioPorId(recurso.getTerritorioId()));
+    }
+
+    @FXML
+    public void initialize() {
+
+    }
 }
